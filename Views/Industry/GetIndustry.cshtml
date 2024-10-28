@@ -1,0 +1,39 @@
+﻿@model TuncDenizci.Models.IndustryClass
+@{
+    ViewData["Title"] = "GetIndustry";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Fatura Güncelleme Sayfası</h2>
+<br />
+@using (Html.BeginForm("UpdateIndustry", "Industry", FormMethod.Post))
+{
+    @Html.Label("Id")
+    @Html.TextBoxFor(x => x.Id, new { @class = "form-control" })
+    <br />
+    @Html.Label("Irsaliye NO")
+    @Html.TextBoxFor(x => x.IrsaliyeNo, new { @class = "form-control" })
+    <br />
+    @Html.Label("Plaka")
+    @Html.TextBoxFor(x => x.Plate, new { @class = "form-control" })
+    <br />
+    @Html.Label("Tonaj")
+    @Html.TextBoxFor(x => x.Tonaj, new { @class = "form-control" })
+    <br />
+    @Html.Label("Gemi Adı")
+    @Html.TextBoxFor(x => x.ShipName, new { @class = "form-control" })
+    <br />
+    @Html.Label("Firma")
+    <br />
+    @Html.DropDownListFor(x => x.FactoriesID, (List<SelectListItem>)ViewBag.ind, new { @class = "form-control" })
+    <br />
+    @Html.Label("Tarih")
+    @Html.TextBoxFor(x => x.DateT, new { @class = "form-control", @placeholder = "06.10.2021 12:52:05 (gün-ay-yıl saat:dakika:saniye) şeklinde giriş yapın." })
+    <br />
+    @Html.Label("Ekleyen Kullanıcı")
+    <br />
+    @Html.DropDownListFor(x => x.LogUser, (List<SelectListItem>)ViewBag.lu, new { @class = "form-control" })
+    <br />
+    <button class="btn btn-info" style="background-color:darkblue">Faturayı Güncelle</button>
+}
+

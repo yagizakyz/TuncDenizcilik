@@ -1,0 +1,38 @@
+﻿@model TuncDenizci.Models.FactoriesClass
+@{
+    ViewData["Title"] = "DetailFactories";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@ViewBag.f Fatura Listesi</h2>
+<br />
+<a href="/Industry/NewIndustry" class="btn btn-primary" style="background-color:darkblue">Fatura Ekle</a>
+<br />
+<br />
+<table class="table table-bordered">
+    <tr>
+        <th>ID</th>
+        <th>İrsaliye NO</th>
+        <th>Plaka</th>
+        <th>Tonaj</th>
+        <th>Gemi Adı</th>
+        <th>Tarih</th>
+        <th>Ekleyen Kullanıcı</th>
+        <th>Güncelle</th>
+        <th>Sil</th>
+    </tr>
+    @foreach (var item in Model.IndustryC)
+    {
+        <tr>
+            <td>@item.Id</td>
+            <td>@item.IrsaliyeNo</td>
+            <td>@item.Plate</td>
+            <td>@item.Tonaj</td>
+            <td>@item.ShipName</td>
+            <td>@item.DateT</td>
+            <td>@item.LogUser</td>
+            <td><a href="/Industry/GetIndustry/@item.Id" class="btn btn-success">Güncelle</a></td>
+            <td><a href="/Industry/DeleteIndustry/@item.Id" onclick="return confirm('Silmek istediğine emin misin?')" class="btn btn-danger">Sil</a></td>
+        </tr>
+    }
+</table>

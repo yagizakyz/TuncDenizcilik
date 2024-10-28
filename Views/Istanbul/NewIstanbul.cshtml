@@ -1,0 +1,12 @@
+﻿@addTagHelper*, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    ViewData["Title"] = "NewIstanbul";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>İstanbul Excel Ekleme</h1>
+<br />
+<form asp-controller="Istanbul" asp-action="NewIstanbul" method="post" enctype="multipart/form-data">
+    <input class="btn btn-success" type="file" name="postedFile" />
+    <input class="btn btn-primary" type="submit" value="Ekle" />
+</form>

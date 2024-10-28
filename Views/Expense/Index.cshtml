@@ -1,0 +1,30 @@
+﻿@model IEnumerable<TuncDenizci.Models.MonthClass>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Aylık Gider Listesi</h2>
+<br />
+<a href="/Expense/ExportToExcel" class="btn btn-success">Excel Olarak İndir</a>
+<a href="/Expense/NewExpense/" class="btn btn-primary" style="background-color:darkblue">Yeni Gider Ekleme</a>
+<a href="/PastExpense/Index/" class="btn btn-primary" style="background-color:darkcyan">2021 Gider Listesi</a>
+<br />
+<br />
+<table class="table table-bordered">
+    <tr>
+        <th>Ay</th>
+        <th>Gider</th>
+        <th>Detaylı</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.MonthName</td>
+            <td>@item.Amount</td>
+            <td><a href="/Expense/DetailExpense/@item.Id" class="btn btn-info">Detaylı</a></td>
+        </tr>
+    }
+</table>
+<h2>Toplam Tutar: @ViewBag.e</h2>
+

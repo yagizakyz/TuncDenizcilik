@@ -1,0 +1,37 @@
+﻿@model IEnumerable<TuncDenizci.Models.Expense21Class>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>2021 Gider Listesi</h2>
+<br />
+<a href="/PastExpense/NewPE/" class="btn btn-primary" style="background-color:darkblue">2021 Gider Ekleme</a>
+<a href="/PastExpense/ExportToExcel" class="btn btn-success">Excel Olarak İndir</a>
+<br />
+<table class="table table-bordered">
+    <tr>
+        <th>ID</th>
+        <th>Açıklama</th>
+        <th>Tutar</th>
+        <th>Gün</th>
+        <th>Ay</th>
+        <th>Yıl</th>
+        <th>Güncelle</th>
+        <th>Ekleyen Kullanıcı</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Id</td>
+            <td>@item.Description</td>
+            <td>@item.Amount</td>
+            <td>@item.Day</td>
+            <td>@item.Month</td>
+            <td>@item.Year</td>
+            <td><a href="/PastExpense/DeleteExpense/@item.Id" class="btn btn-danger">Sil</a></td>
+            <td>@item.LogUser</td>
+        </tr>
+    }
+</table>
+<h2>Toplam Tutar: @ViewBag.e</h2>

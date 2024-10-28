@@ -1,0 +1,49 @@
+﻿@using X.PagedList
+@using X.PagedList.Mvc.Core
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Fabrika Faturaları Listesi</h2>
+<br />
+<a href="/Industry/ExportToExcel" class="btn btn-success">Excel Olarak İndir</a>
+<a href="/Industry/NewIndustry" class="btn btn-primary" style="background-color:darkblue">Fatura Ekle</a>
+<br />
+<br />
+@using (Html.BeginForm("Index", "Industry", FormMethod.Get))
+{
+<p>
+    Plaka: @Html.TextBox("plate")  Gemi Adı: @Html.TextBox("sh")  Firma: @Html.TextBox("ff")  Tarih: @Html.TextBox("date")
+    <input class="form-check" type="submit" value="Ara" />
+</p>
+}
+<br />
+<table class="table table-bordered">
+    <tr>
+        <th>İrsaliye NO</th>
+        <th>Plaka</th>
+        <th>Tonaj</th>
+        <th>Gemi Adı</th>
+        <th>Firma Adı</th>
+        <th>Tarih</th>
+        <th>Ekleyen Kullanıcı</th>
+        <th>Güncelle</th>
+        <th>Sil</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.IrsaliyeNo</td>
+            <td>@item.Plate</td>
+            <td>@item.Tonaj</td>
+            <td>@item.ShipName</td>
+            <td>@item.Factories.IndustryName</td>
+            <td>@item.DateT</td>
+            <td>@item.LogUser</td>
+            <td><a href="/Industry/GetIndustry/@item.Id" class="btn btn-success">Güncelle</a></td>
+            <td><a href="/Industry/DeleteIndustry/@item.Id" onclick="return confirm('Silmek istediğine emin misin?')" class="btn btn-danger">Sil</a></td>
+        </tr>
+    }
+</table>
+@Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page }))

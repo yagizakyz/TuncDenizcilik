@@ -1,0 +1,33 @@
+﻿@model TuncDenizci.Models.ExpenseClass
+@{
+    ViewData["Title"] = "NewExpense";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Yeni Gider Ekleme Sayfası</h2>
+<br />
+@using (Html.BeginForm("NewExpense", "Expense", FormMethod.Post))
+{
+    @Html.Label("Açıklama")
+    @Html.TextAreaFor(x => x.Description, new { @class = "form-control" })
+    <br />
+    @Html.Label("Tutar")
+    @Html.TextBoxFor(x => x.Amount, new { @class = "form-control" })
+    <br />
+    @Html.Label("Gün")
+    @Html.TextBoxFor(x => x.Day, new { @class = "form-control" })
+    <br />
+    @Html.Label("Ay")
+    <br />
+    @Html.DropDownListFor(x => x.MonthID, (List<SelectListItem>)ViewBag.mon, new { @class = "form-control" })
+    <br />
+    @Html.Label("Yıl")
+    <br />
+    @Html.DropDownListFor(x => x.Year, (List<SelectListItem>)ViewBag.y, new { @class = "form-control" })
+    <br />
+    @Html.Label("Kullanıcı")
+    <br />
+    @Html.DropDownListFor(x => x.LogUser, (List<SelectListItem>)ViewBag.lu, new { @class = "form-control" })
+    <br />
+    <button class="btn btn-info" style="background-color:darkblue">Gider Ekle</button>
+}

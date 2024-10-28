@@ -1,0 +1,61 @@
+﻿@using X.PagedList
+@using X.PagedList.Mvc.Core
+@model IEnumerable<TuncDenizci.Models.PersonClass>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Personel Listesi</h1>
+<br />
+<br />
+@if (User.IsInRole("Full"))
+{
+    <a href="/Person/NewPerson/" class="btn btn-primary" style="background-color:darkblue">Yeni Personel Ekle</a>
+}
+<br />
+<br />
+<table class="table table-bordered">
+    <tr>
+        <th>ID</th>
+        <th>Ad</th>
+        <th>Soyad</th>
+        <th>Yetkisi</th>
+        <th>Ekleyen Kullanıcı</th>
+        <th>Pasif</th>
+        <th>Aktif</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+<tr>
+    <td>@item.Id</td>
+    <td>@item.Name</td>
+    <td>@item.Surname</td>
+    <td>@item.Roles</td>
+    <td>@item.LogUser</td>
+    @if (User.IsInRole("Full"))
+    {
+        @if (item.Deletes == false)
+        {
+            <td><a href="/Person/DeletePerson/@item.Id" onclick="return confirm('Silmek istediğine emin misin?')" class="btn btn-danger">Pasif</a></td>
+        }
+        @if (item.Deletes == true)
+        {
+            <td style="color:#ff000d">Pasif</td>
+        }
+    }
+    @if (User.IsInRole("Full"))
+    {
+        @if (item.Deletes == true)
+        {
+            <td><a href="/Person/DeletePerson/@item.Id" onclick="return confirm('Aktif etmek istediğine emin misin?')" class="btn btn-success">Aktif</a></td>
+        }
+        @if (item.Deletes == false)
+        {
+            <td style="color:#ff000d">Aktif</td>
+        }
+    }
+</tr>
+    }
+</table>
+@Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page }))

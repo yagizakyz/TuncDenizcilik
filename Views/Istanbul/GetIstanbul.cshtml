@@ -1,0 +1,64 @@
+﻿@model TuncDenizci.Models.IstanbulClass
+@{
+    ViewData["Title"] = "GetIstanbul";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Fatura Güncelleme Sayfası</h2>
+<br />
+@using (Html.BeginForm("UpdateIstanbul", "Istanbul", FormMethod.Post))
+{
+    @Html.Label("Id")
+    @Html.TextBoxFor(x => x.Id, new { @class = "form-control" })
+    <br />
+    @Html.Label("NO")
+    @Html.TextBoxFor(x => x.NO, new { @class = "form-control" })
+    <br />
+    @Html.Label("Plaka")
+    @Html.TextBoxFor(x => x.Plate, new { @class = "form-control" })
+    <br />
+    @Html.Label("Tonaj-1")
+    @Html.TextBoxFor(x => x.Tonaj1, new { @class = "form-control" })
+    <br />
+    @Html.Label("Tonaj-2")
+    @Html.TextBoxFor(x => x.Tonaj2, new { @class = "form-control" })
+    <br />
+    @Html.Label("Net")
+    @Html.TextBoxFor(x => x.Net, new { @class = "form-control" })
+    <br />
+    @Html.Label("Tarih-1")
+    @Html.TextBoxFor(x => x.Date1, new { @class = "form-control", @placeholder = "06.10.2021 12:52:05 (gün-ay-yıl saat:dakika:saniye) şeklinde giriş yapın." })
+    <br />
+    @Html.Label("Saat-1")
+    @Html.TextBoxFor(x => x.Time1, new { @class = "form-control", @placeholder = "12:52:05 (saat:dakika:saniye) şeklinde giriş yapın." })
+    <br />
+    @Html.Label("Tarih-2")
+    @Html.TextBoxFor(x => x.Date2, new { @class = "form-control", @placeholder = "06.10.2021 12:52:05 (gün-ay-yıl saat:dakika:saniye) şeklinde giriş yapın." })
+    <br />
+    @Html.Label("Saat-2")
+    @Html.TextBoxFor(x => x.Time2, new { @class = "form-control", @placeholder = "12:52:05 (saat:dakika:saniye) şeklinde giriş yapın." })
+    <br />
+    @Html.Label("Malzeme")
+    @Html.TextBoxFor(x => x.Material, new { @class = "form-control" })
+    <br />
+    @Html.Label("Çıkış Yeri")
+    @Html.TextBoxFor(x => x.Location, new { @class = "form-control" })
+    <br />
+    @Html.Label("Adet")
+    @Html.TextBoxFor(x => x.Number, new { @class = "form-control" })
+    <br />
+    @Html.Label("Varış Yeri")
+    @Html.TextBoxFor(x => x.Tonaj1, new { @class = "form-control" })
+    <br />
+    @Html.Label("Irsaliye NO")
+    @Html.TextBoxFor(x => x.IrsaliyeNo, new { @class = "form-control" })
+    <br />
+    @Html.Label("Şöför")
+    @Html.TextBoxFor(x => x.Chauffeur, new { @class = "form-control" })
+    <br />
+    @Html.Label("Ekleyen Kullanıcı")
+    <br />
+    @Html.DropDownListFor(x => x.LogUser, (List<SelectListItem>)ViewBag.lu, new { @class = "form-control" })
+    <br />
+    <button class="btn btn-info" style="background-color:darkblue">Faturayı Güncelle</button>
+}

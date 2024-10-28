@@ -1,0 +1,97 @@
+﻿@using X.PagedList
+@using X.PagedList.Mvc.Core
+@model IEnumerable<TuncDenizci.Models.IstanbulClass>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>İstanbul Fatura Listesi</h2>
+<br />
+<a href="/Istanbul/ExportToExcel" class="btn btn-success">Excel Olarak İndir</a>
+<a href="/Istanbul/NewIstanbul/" class="btn btn-primary" style="background-color:darkblue">Fatura Ekle</a>
+<br />
+<br />
+@using (Html.BeginForm("Index", "Istanbul", FormMethod.Get))
+{
+    <p>
+        Plaka: @Html.TextBox("pl")  Tarih: @Html.TextBox("date")
+        <input class="form-check" type="submit" value="Ara" />
+    </p>
+}
+<br />
+<table class="table table-bordered">
+    <tr>
+        <th>Onay</th>
+        <th>NO</th>
+        <th>Plaka</th>
+        <th>Tonaj-1</th>
+        <th>Tonaj-2</th>
+        <th>Net</th>
+        <th>Tarih-1</th>
+        <th>Saat-1</th>
+        <th>Tarih-2</th>
+        <th>Saat-2</th>
+        <th>Malzeme</th>
+        <th>Çıkış Yeri</th>
+        <th>Adet</th>
+        <th>Varış Yeri</th>
+        <th>İrasileye No</th>
+        <th>Şöför</th>
+        <th>Güncelle</th>
+        <th>Sil</th>
+        <th>Ekleyen Kullanıcı</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        @if (item.Accepteds == false)
+        {
+            <tr style="color:red">
+                <td><a href="/Istanbul/AcceptedIstanbul/@item.Id" class="btn btn-danger">X</a></td>
+                <td>@item.NO</td>
+                <td>@item.Plate</td>
+                <td>@item.Tonaj1</td>
+                <td>@item.Tonaj2</td>
+                <td>@item.Net</td>
+                <td>@item.Date1</td>
+                <td>@item.Time1</td>
+                <td>@item.Date2.ToString("dd.MM.yyyy")</td>
+                <td>@item.Time2</td>
+                <td>@item.Material</td>
+                <td>@item.Location</td>
+                <td>@item.Number</td>
+                <td>@item.Destination</td>
+                <td>@item.IrsaliyeNo</td>
+                <td>@item.Chauffeur</td>
+                <td><a href="/Istanbul/GetIstanbul/@item.Id" class="btn btn-success">Güncelle</a></td>
+                <td><a href="/Istanbul/DeleteIstanbul/@item.Id" onclick="return confirm('Silmek istediğine emin misin?')" class="btn btn-danger">Sil</a></td>
+                <td>@item.LogUser</td>
+            </tr>
+        }
+        @if (item.Accepteds == true)
+        {
+            <tr style="color:green">
+                <td><a href="#" class="btn btn-success">✓</a></td>
+                <td>@item.NO</td>
+                <td>@item.Plate</td>
+                <td>@item.Tonaj1</td>
+                <td>@item.Tonaj2</td>
+                <td>@item.Net</td>
+                <td>@item.Date1</td>
+                <td>@item.Time1</td>
+                <td>@item.Date2.ToString("dd.MM.yyyy")</td>
+                <td>@item.Time2</td>
+                <td>@item.Material</td>
+                <td>@item.Location</td>
+                <td>@item.Number</td>
+                <td>@item.Destination</td>
+                <td>@item.IrsaliyeNo</td>
+                <td>@item.Chauffeur</td>
+                <td><a href="/Istanbul/GetIstanbul/@item.Id" class="btn btn-success">Güncelle</a></td>
+                <td><a href="/Istanbul/DeleteIstanbul/@item.Id" onclick="return confirm('Silmek istediğine emin misin?')" class="btn btn-danger">Sil</a></td>
+                <td>@item.LogUser</td>
+            </tr>
+        }
+    }
+</table>
+@Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page }))

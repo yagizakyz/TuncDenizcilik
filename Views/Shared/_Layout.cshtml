@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Tunç Denizcilik Panel</title>
+    <link rel="icon" href="~/favico.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body style="background-color:white">
+    <nav class="navbar navbar-default">
+        <div class="container-fluid" style="background-color:dodgerblue">
+            <div class="navbar-header">
+                <a class="navbar-brand" style="color:darkblue">Tunç Denizcilik</a>
+            </div>
+            <ul class="nav navbar-nav">
+                @if (User.IsInRole("Full") || User.IsInRole("FTR"))
+                {
+                    <li><a href="/Istanbul/Index" style="color:white">İstanbul Fatura</a></li>
+                    <li><a href="/Industry/Index" style="color:white">Fabrika Fatura</a></li>
+                    <li><a href="/Expense/Index" style="color:white">Gider</a></li>
+                    <li><a href="/Factories/Index" style="color:white">Firmalar</a></li>
+                }
+                @if (User.IsInRole("Full"))
+                {
+                    <li><a href="/Person/Index" style="color:white">Personel</a></li>
+                }
+                <li><a href="/Login/LogOut/" style="color:white">Çıkış Yap</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        @RenderBody()
+    </div>
+</body>
+</html>

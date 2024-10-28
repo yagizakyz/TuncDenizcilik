@@ -1,0 +1,20 @@
+﻿@model TuncDenizci.Models.FactoriesClass
+@{
+    ViewData["Title"] = "NewFactories";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Yeni Firma Ekleme Sayfası</h2>
+<br />
+@using (Html.BeginForm("NewFactories", "Factories", FormMethod.Post))
+{
+    @Html.Label("Firma Adı")
+    @Html.TextBoxFor(x => x.IndustryName, new { @class = "form-control" })
+    <br />
+    @Html.Label("Ekleyen Kullanıcı")
+    <br />
+    @Html.DropDownListFor(x => x.LogUser, (List<SelectListItem>)ViewBag.lu, new { @class = "form-control" })
+    <br />
+    <button class="btn btn-info" style="background-color:darkblue">Firma Ekle</button>
+}
+

@@ -1,0 +1,32 @@
+﻿@model TuncDenizci.Models.PersonClass
+@{
+    ViewData["Title"] = "NewPerson";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Yeni Personel Ekleme</h2>
+<h4>@Html.ValidationSummary(false, "Her alan doldurulmak zorunda", new { @style = "color:red" })</h4>
+@using (Html.BeginForm("NewPerson", "Person", FormMethod.Post))
+{
+    @Html.Label("Ad")
+    @Html.TextBoxFor(x => x.Name, new { @class = "form-control" })
+    <br />
+    @Html.Label("Soyad")
+    @Html.TextBoxFor(x => x.Surname, new { @class = "form-control" })
+    <br />
+    @Html.Label("Kullanıcı Adı")
+    @Html.TextBoxFor(x => x.Nickname, new { @class = "form-control" })
+    <br />
+    @Html.Label("Şifre")
+    @Html.TextBoxFor(x => x.Password, new { @class = "form-control" })
+    <br />
+    @Html.Label("Yetki")
+    <br />
+    @Html.DropDownListFor(x => x.Roles, (List<SelectListItem>)ViewBag.roles, new { @class = "form-control" })
+    <br />
+    @Html.Label("Kullanıcı")
+    <br />
+    @Html.DropDownListFor(x => x.LogUser, (List<SelectListItem>)ViewBag.lu, new { @class = "form-control" })
+    <br />
+    <button class="btn btn-info" style="background-color:darkblue">Personeli Ekle</button>
+}

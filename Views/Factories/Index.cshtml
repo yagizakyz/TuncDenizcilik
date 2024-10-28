@@ -1,0 +1,41 @@
+﻿
+@model IEnumerable<TuncDenizci.Models.FactoriesClass>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Firma Listesi</h1>
+<br />
+@if (User.IsInRole("Full"))
+{
+    <a href="/Factories/NewFactories/" class="btn btn-primary" style="background-color:darkblue">Yeni Firma Ekle</a>
+}
+<br />
+<br />
+<table class="table table-bordered">
+    <tr>
+        <th>ID</th>
+        <th>Firma Adı</th>
+        <th>Ekleyen Kullanıcı</th>
+        <th>İşler</th>
+        <th>Pasif</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Id</td>
+            <td>@item.IndustryName</td>
+            <td>@item.LogUser</td>
+            <td><a href="/Factories/DetailFactories/@item.Id" class="btn btn-info">İşleri</a></td>
+            @if (item.Deletes == false)
+            {
+                <td><a href="/Factories/DeleteFactories/@item.Id" onclick="return confirm('Silmek istediğine emin misin?')" class="btn btn-danger">Pasif</a></td>
+            }
+            @if (item.Deletes == true)
+            {
+                <td style="color:#ff000d">Pasif</td>
+            }
+        </tr>
+    }
+</table>
